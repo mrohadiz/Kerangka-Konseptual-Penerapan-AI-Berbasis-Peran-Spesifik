@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografis: Arsitektur AI Berbasis Peran</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- 
+    Plan Summary:
+    Narrative: Guides the user from a high-level analogy to the technical architecture and business value of role-based AI.
+    Structure: 
+    1. Hero section: A bold statement about the future of AI assistants.
+    2. The Core Analogy: "Smart Library" concept explained with visual cards.
+    3. Core Components Deep Dive: Radar chart comparing LLM, RAG, and Memory. Donut chart showing RAG's contribution.
+    4. The Master Blueprint: An HTML/CSS based flowchart of the 8-step reference architecture.
+    5. AI Personas in Action: Bar chart comparing the focus of different AI roles (CEO, Manager, Analyst).
+    6. Key Benefits: Highlight advantages using icon-based cards.
+    
+    Visualization Choices:
+    - Core Component Comparison -> Goal: Compare -> Radar Chart (Chart.js). Justification: Effectively shows how different components excel across multiple attributes (e.g., creativity, factual accuracy, personalization). NO SVG.
+    - RAG Contribution -> Goal: Inform -> Donut Chart (Chart.js). Justification: Simple and clear way to show a part-to-whole relationship, emphasizing RAG's importance for fact-based answers. NO SVG.
+    - Reference Architecture -> Goal: Organize -> HTML/CSS Flowchart. Justification: A complex process flow that must be custom-built with Tailwind CSS grid/flexbox to be responsive and avoid prohibited libraries like Mermaid JS or SVG.
+    - AI Personas -> Goal: Compare -> Horizontal Bar Chart (Chart.js). Justification: Ideal for comparing and ranking the focus areas of different categorical roles. NO SVG.
+    - Other elements like "Smart Library" and "Key Benefits" use structured HTML/CSS with Unicode characters for icons, adhering to NO SVG rule.
+
+    Color Palette Selection:
+    - Palette Name: Brilliant Blues
+    - Justification: Vibrant, professional, and high-contrast, suitable for a technology-focused topic.
+    - HEX Codes: #004AAD (Primary), #009FFD (Accent), #2A2A72 (Dark), #FFFFFF (Text/BG), #F3F4F6 (Light BG)
+
+    Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All diagrams are built with HTML/CSS or rendered on a Canvas element by Chart.js.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #009FFD;
+            line-height: 1;
+            text-align: center;
+        }
+        .flow-box {
+            border: 2px solid #004AAD;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        .flow-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-[#2A2A72] mb-4">Membangun Asisten AI Berbasis Peran</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Sebuah infografis yang mengupas arsitektur untuk menciptakan AI yang cerdas, kontekstual, dan disesuaikan untuk setiap peran dalam organisasi Anda.</p>
+        </header>
+
+        <main class="space-y-16">
+            <section id="analogy">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#2A2A72]">Analogi Inti: Perpustakaan Cerdas</h2>
+                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10">Untuk memahami sistem ini, bayangkan sebuah perpustakaan cerdas yang sangat efisien. Setiap komponen memiliki peran yang jelas.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-4">📚</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">Sumber Pengetahuan</h3>
+                        <p class="text-sm text-gray-600">Seluruh koleksi buku dan arsip perusahaan Anda (database, dokumen, SOP).</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">RAG (Retrieval)</h3>
+                        <p class="text-sm text-gray-600">Mesin pencari super cerdas yang menemukan buku yang tepat sebelum menjawab.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">LLM (Model Bahasa)</h3>
+                        <p class="text-sm text-gray-600">Pustakawan jenius yang membaca, memahami, dan merangkum informasi.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-4">💾</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">Memori</h3>
+                        <p class="text-sm text-gray-600">Catatan pustakawan tentang percakapan sebelumnya agar tidak ada pengulangan.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <div class="text-4xl mb-4">📋</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">Pola Interaksi</h3>
+                        <p class="text-sm text-gray-600">Formulir standar untuk memastikan setiap pertanyaan diajukan dengan format yang benar.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="components">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#2A2A72]">Kekuatan Setiap Komponen Inti</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-[#004AAD]">Profil Kemampuan Komponen</h3>
+                        <p class="text-gray-600 mb-4">Setiap komponen memiliki keunggulan unik. RAG memberikan landasan faktual, LLM menyediakan kemampuan penalaran dan bahasa, sementara Memori memungkinkan personalisasi.</p>
+                        <div class="chart-container">
+                            <canvas id="componentRadarChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-[#004AAD]">Kontribusi Jawaban AI</h3>
+                        <p class="text-gray-600 mb-4">Dalam arsitektur yang matang, sebagian besar jawaban AI didasarkan pada data internal yang diambil oleh RAG, bukan hanya pengetahuan umum LLM. Ini memastikan akurasi dan relevansi.</p>
+                         <div class="chart-container">
+                            <canvas id="ragDonutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="architecture">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#2A2A72]">Cetak Biru Arsitektur Referensi</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">Ini adalah alur kerja 8 langkah yang mengubah permintaan pengguna menjadi insight yang cerdas dan relevan dengan perannya. Arsitektur ini modular dan dapat diskalakan.</p>
+                
+                <div class="w-full overflow-x-auto p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                        <div class="flow-box p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-md text-[#004AAD]">1. Lapisan Input</h4>
+                            <p class="text-sm text-gray-600">Pengguna mengajukan pertanyaan.</p>
+                        </div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-box p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-md text-[#004AAD]">2. Detektor Niat & Peran</h4>
+                            <p class="text-sm text-gray-600">Mengidentifikasi SIAPA pengguna dan APA tujuannya.</p>
+                        </div>
+                        <div class="flow-arrow md:hidden">↓</div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-box p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-md text-[#004AAD]">3. Router Pola</h4>
+                            <p class="text-sm text-gray-600">Memilih template prompt yang sesuai.</p>
+                        </div>
+                        <div class="col-span-1 md:col-span-3 flow-arrow">↓</div>
+                        <div class="flow-box p-4 rounded-lg text-center md:col-start-3">
+                            <h4 class="font-bold text-md text-[#004AAD]">4. Komposer Prompt</h4>
+                            <p class="text-sm text-gray-600">Merakit prompt final dari input, pola, memori & data RAG.</p>
+                        </div>
+                        <div class="flow-arrow md:hidden">↓</div>
+                        <div class="hidden md:block col-start-2 row-start-3 flow-arrow">↓</div>
+                        <div class="flow-box p-4 rounded-lg text-center md:col-start-2">
+                             <h4 class="font-bold text-md text-[#004AAD]">5. Mesin RAG</h4>
+                            <p class="text-sm text-gray-600">Mengambil data faktual dari sumber pengetahuan.</p>
+                        </div>
+                        <div class="flow-arrow md:hidden">↓</div>
+                        <div class="hidden md:block col-start-1 row-start-3 flow-arrow">↓</div>
+                         <div class="flow-box p-4 rounded-lg text-center md:col-start-1">
+                            <h4 class="font-bold text-md text-[#004AAD]">7. Penyimpanan Memori</h4>
+                            <p class="text-sm text-gray-600">Menyediakan riwayat & preferensi.</p>
+                        </div>
+                        <div class="col-span-1 md:col-span-3 flow-arrow">↓</div>
+                        <div class="flow-box p-4 rounded-lg text-center bg-[#004AAD] text-white border-none md:col-start-2">
+                            <h4 class="font-bold text-md">🧠 6. Eksekutor LLM 🧠</h4>
+                            <p class="text-sm text-blue-100">Menganalisis prompt lengkap & menghasilkan jawaban.</p>
+                        </div>
+                        <div class="col-span-1 md:col-span-3 flow-arrow">↓</div>
+                        <div class="flow-box p-4 rounded-lg text-center md:col-start-2">
+                             <h4 class="font-bold text-md text-[#004AAD]">8. Penangan Output</h4>
+                            <p class="text-sm text-gray-600">Memformat hasil agar mudah dibaca & mengirim ke pengguna.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="personas">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#2A2A72]">AI Personas: Insight yang Disesuaikan</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                         <h3 class="text-xl font-bold mb-4 text-[#004AAD]">Fokus Analisis Berdasarkan Peran</h3>
+                         <p class="text-gray-600 mb-4">Setiap persona AI dilatih untuk fokus pada metrik yang paling relevan dengan peran penggunanya. Seorang CEO membutuhkan insight strategis, sementara seorang Manajer membutuhkan data operasional yang dapat ditindaklanjuti.</p>
+                         <div class="chart-container h-[450px] md:h-[500px]">
+                            <canvas id="personaBarChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="font-bold text-lg text-[#004AAD]">🤵 Asisten CEO</h4>
+                            <p class="text-gray-600">Memberikan ringkasan eksekutif, analisis pasar, dan proyeksi strategis jangka panjang.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                             <h4 class="font-bold text-lg text-[#004AAD]">🧑‍💼 Penasihat Manajer</h4>
+                            <p class="text-gray-600">Menyajikan data kinerja tim, efisiensi operasional, dan rekomendasi taktis harian.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                             <h4 class="font-bold text-lg text-[#004AAD]">📊 Analis Otomatis</h4>
+                            <p class="text-gray-600">Menghasilkan laporan terstruktur, visualisasi data mendalam, dan identifikasi anomali.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+             <section id="benefits">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#2A2A72]">Manfaat Utama Arsitektur Ini</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">Akurasi Tinggi</h3>
+                        <p class="text-gray-600">Jawaban didasarkan pada data internal perusahaan yang terverifikasi, bukan pengetahuan umum yang mungkin usang.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-3xl mb-3">👤</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">Personalisasi Mendalam</h3>
+                        <p class="text-gray-600">Sistem belajar dari interaksi sebelumnya untuk memberikan respons yang lebih relevan bagi setiap individu.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-3xl mb-3">🔧</div>
+                        <h3 class="font-bold text-lg text-[#004AAD]">Modular dan Fleksibel</h3>
+                        <p class="text-gray-600">Model LLM dapat diganti atau ditingkatkan tanpa harus mengubah seluruh logika bisnis inti sistem.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="text-gray-600">Infografis ini mengilustrasikan kerangka kerja untuk membangun solusi AI yang canggih dan kontekstual.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const wrapLabel = (label, maxWidth) => {
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = currentLine.length > 0 ? currentLine + ' ' + word : word;
+                    }
+                });
+                lines.push(currentLine);
+                return lines;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+            
+            const commonChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#374151',
+                            font: {
+                                family: 'Inter',
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: { family: 'Inter', weight: 'bold', size: 14 },
+                        bodyFont: { family: 'Inter', size: 12 },
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            };
+
+            const colors = {
+                primary: '#004AAD',
+                accent: '#009FFD',
+                dark: '#2A2A72',
+                primaryTransparent: 'rgba(0, 74, 173, 0.2)',
+                accentTransparent: 'rgba(0, 159, 253, 0.2)',
+                darkTransparent: 'rgba(42, 42, 114, 0.2)'
+            };
+
+            const componentRadarCtx = document.getElementById('componentRadarChart');
+            if(componentRadarCtx) {
+                new Chart(componentRadarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Akurasi Faktual', 'Penalaran Kreatif', 'Personalisasi', 'Kecepatan', 'Konteks Tugas'],
+                        datasets: [
+                            {
+                                label: 'RAG',
+                                data: [9, 4, 3, 7, 8],
+                                backgroundColor: colors.primaryTransparent,
+                                borderColor: colors.primary,
+                                borderWidth: 2,
+                                pointBackgroundColor: colors.primary,
+                            },
+                            {
+                                label: 'LLM',
+                                data: [5, 9, 6, 8, 7],
+                                backgroundColor: colors.accentTransparent,
+                                borderColor: colors.accent,
+                                borderWidth: 2,
+                                pointBackgroundColor: colors.accent,
+                            },
+                             {
+                                label: 'Memori',
+                                data: [6, 5, 9, 6, 9],
+                                backgroundColor: colors.darkTransparent,
+                                borderColor: colors.dark,
+                                borderWidth: 2,
+                                pointBackgroundColor: colors.dark,
+                            }
+                        ]
+                    },
+                    options: {
+                        ...commonChartOptions,
+                        scales: {
+                            r: {
+                                angleLines: { color: '#E5E7EB' },
+                                grid: { color: '#E5E7EB' },
+                                pointLabels: { 
+                                    font: { size: 12, family: 'Inter' },
+                                    color: '#4B5563'
+                                },
+                                ticks: {
+                                    backdropColor: 'transparent',
+                                    color: '#6B7280',
+                                    stepSize: 2
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            const ragDonutCtx = document.getElementById('ragDonutChart');
+            if(ragDonutCtx) {
+                new Chart(ragDonutCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Data Internal via RAG', 'Pengetahuan Umum LLM', 'Konteks dari Memori'],
+                        datasets: [{
+                            label: 'Sumber Jawaban AI',
+                            data: [70, 20, 10],
+                            backgroundColor: [
+                                colors.primary,
+                                colors.accent,
+                                colors.dark
+                            ],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 3,
+                        }]
+                    },
+                    options: {
+                        ...commonChartOptions,
+                        cutout: '60%'
+                    }
+                });
+            }
+
+            const personaBarCtx = document.getElementById('personaBarChart');
+            if(personaBarCtx) {
+                new Chart(personaBarCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                           wrapLabel('Ringkasan Eksekutif & Strategi Jangka Panjang', 20), 
+                           wrapLabel('Analisis Kinerja Tim & Efisiensi Operasional', 20),
+                           wrapLabel('Pembuatan Laporan Terstruktur & Visualisasi Data', 20)
+                        ],
+                        datasets: [
+                            {
+                                label: 'Asisten CEO',
+                                data: [9, 4, 2],
+                                backgroundColor: colors.dark,
+                                borderColor: colors.dark,
+                                borderWidth: 1
+                            },
+                             {
+                                label: 'Penasihat Manajer',
+                                data: [5, 9, 5],
+                                backgroundColor: colors.primary,
+                                borderColor: colors.primary,
+                                borderWidth: 1
+                            },
+                             {
+                                label: 'Analis Otomatis',
+                                data: [3, 6, 9],
+                                backgroundColor: colors.accent,
+                                borderColor: colors.accent,
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        ...commonChartOptions,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                stacked: true,
+                                grid: { display: false },
+                                ticks: { color: '#4B5563' }
+                            },
+                            y: {
+                                stacked: true,
+                                grid: { color: '#E5E7EB' },
+                                ticks: { 
+                                    color: '#374151',
+                                    font: {
+                                        size: 11,
+                                        family: 'Inter'
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                           ...commonChartOptions.plugins,
+                           title: {
+                             display: true,
+                             text: 'Skor Relevansi Tugas untuk Setiap Peran (0-10)',
+                             padding: {
+                                 bottom: 20
+                             },
+                             font: {
+                                 size: 14,
+                                 family: 'Inter'
+                             },
+                             color: '#4B5563'
+                           }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
